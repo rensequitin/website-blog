@@ -1,7 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, Http404
 from .models import PostModel
 from django.contrib.auth.decorators import login_required
+from .forms import PostModelForm
+from django.urls import reverse
 
 # @login_required or @login_required(login_url='/login/')
 def list_view(request):	
@@ -30,6 +32,22 @@ def detail_view(request,pk):
 	template = 'blog/detail.html'
 	query_set = get_object_or_404(PostModel,pk=pk)
 	context = {'query_set':query_set}
+	return render(request, template, context)
+
+def create_view(request):	
+	# if request.method == "POST"
+	# 	form = PostModelForm(request.POST)
+	# 	if form.is_valid():
+	# 		form.save(commit=False)
+	# 		print(form.cleaned_data)
+	form = PostModelForm(request.POST or None)
+	if form.is_valid():
+		form.save(commit=False)
+		form.save()
+		print(form.cleaned_data)
+		return redirect(reverse('blog:list'))
+	template = 'blog/create.html'
+	context = {'form':form}
 	return render(request, template, context)
 
 @login_required
