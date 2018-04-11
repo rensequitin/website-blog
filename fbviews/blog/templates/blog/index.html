@@ -5,12 +5,15 @@
 	<title>Blog</title>
 </head>
 <body>
+	{% for query in query_set %}
 	<ul>
-		<li>{{ query_set }}</li>
+		<li><a href="{% url 'blog:detail' query.pk %}">Click here</a></li>
+		<li>{{ query }}</li>
 		<li>Object{{ dict }}, Name: {{ dict.name }}</li>
 		<li>{{ num }}</li>
 		<li>List:{{array_list}}, Index:{{ array_list.1 }}</li>
 		<li>{{ boolean }}</li>
 	</ul>	
+	{% endfor %}
 </body>
 </html>

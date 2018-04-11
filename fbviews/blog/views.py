@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from .models import PostModel
 from django.contrib.auth.decorators import login_required
@@ -13,6 +13,23 @@ def list_view(request):
 			   'array_list':[123,143],
 			   'boolean': True,
 			  }
+	return render(request, template, context)
+
+def detail_view(request,pk):	
+	# try:
+	# 	obj = PostModel.objects.get(id=pk)
+	# except:
+	# 	raise Http404
+
+	# query_set = PostModel.objects.filter(id=pk)
+	# if not query_set.exists():
+	# 	raise Http404
+	# else:
+	# 	obj = query_set.first()
+
+	template = 'blog/detail.html'
+	query_set = get_object_or_404(PostModel,pk=pk)
+	context = {'query_set':query_set}
 	return render(request, template, context)
 
 @login_required
