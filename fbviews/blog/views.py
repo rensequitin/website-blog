@@ -1,9 +1,16 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from .models import PostModel
+from django.contrib.auth.decorators import login_required
 
+# @login_required or @login_required(login_url='/login/')
 def list_view(request):	
-	template = "blog/index.html"
+	print(request.user)	
+	if not request.user.is_authenticated:
+		raise Http404		
+
+	print('Logged in')
+	template = 'blog/index.html'
 	query_set = PostModel.objects.all()
 	print(query_set)
 	context = {'query_set':query_set,
