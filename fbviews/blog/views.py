@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import PostModel
 
-def home(request):	
-	response = HttpResponse()
-	print(dir(response))
-	response.write("Hello")
-	response.content = "Practice" # entire content
-	response.status_code = 404 # console 404 not found
-	return response
+def list_view(request):	
+	template = "blog/index.html"
+	query_set = PostModel.objects.all()
+	print(query_set)
+	context = {'query_set':query_set}
+	return render(request, template, context)
