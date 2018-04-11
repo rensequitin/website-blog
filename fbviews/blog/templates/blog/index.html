@@ -5,6 +5,12 @@
 	<title>Blog</title>
 </head>
 <body>
-	{{ query_set }}
+	<ul>
+		<li>{{ query_set }}</li>
+		<li>Object{{ dict }}, Name: {{ dict.name }}</li>
+		<li>{{ num }}</li>
+		<li>List:{{array_list}}, Index:{{ array_list.1 }}</li>
+		<li>{{ boolean }}</li>
+	</ul>	
 </body>
 </html>
