@@ -8,7 +8,8 @@
 	<ul>
 		<li>Name: {{ query_set.title }}</li>
 		<li>Content: {{ query_set.content }}</li>
-		<li><a href="{% url 'blog:update' query_set.pk %}">Update</a></li>		
+		<li><a href="{% url 'blog:delete' query_set.pk %}">Delete</a></li>			
+		<li><a href="{% url 'blog:update' query_set.pk %}">Update</a></li>
 	</ul>	
 </body>
 </html>

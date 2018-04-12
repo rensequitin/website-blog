@@ -34,6 +34,16 @@ def detail_view(request,pk):
 	context = {'query_set':query_set}
 	return render(request, template, context)
 
+@login_required
+def delete_view(request,pk):	
+	template = 'blog/delete.html'
+	qs = get_object_or_404(PostModel,pk=pk)
+	if request.method == "POST":
+		qs.delete()
+		return redirect(reverse('blog:list'))
+	context = {'qs':qs}
+	return render(request, template, context)
+
 @login_required 
 def create_view(request):	
 	# if request.method == "POST"
