@@ -4,11 +4,18 @@ from .models import PostModel
 from django.contrib.auth.decorators import login_required
 from .forms import PostModelForm
 from django.urls import reverse
+from django.db.models import Q
 
 # @login_required or @login_required(login_url='/login/')
 def list_view(request):	
+	query  = request.GET.get('q') # use this instead of request.GET['q']	
 	template = 'blog/index.html'
 	query_set = PostModel.objects.all()	
+	if query is not None:
+		# https://docs.djangoproject.com/en/2.0/topics/db/queries/
+		query_set = query_set.filter(Q(title__icontains=query)
+									 | Q(content__icontains=query)) 
+		# https://docs.djangoproject.com/en/2.0/topics/db/queries/#complex-lookups-with-q-objects
 	context = {'query_set':query_set,
 			   'dict': {'name':'Mina'},
 			   'num': 143,

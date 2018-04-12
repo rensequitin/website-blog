@@ -5,6 +5,9 @@
 	<title>Blog</title>
 </head>
 <body>
+	<form action="{% url 'blog:list' %}">
+		<input type="text" name="q" placeholder="Search">
+	</form>
 	{% for query in query_set %}
 	<ul>
 		<li><a href="{% url 'blog:detail' query.pk %}">Click here</a></li>
