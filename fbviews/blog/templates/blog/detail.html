@@ -7,7 +7,8 @@
 <body>
 	<ul>
 		<li>Name: {{ query_set.title }}</li>
-		<li>Name: {{ query_set.content }}</li>		
+		<li>Content: {{ query_set.content }}</li>
+		<li><a href="{% url 'blog:update' query_set.pk %}">Update</a></li>		
 	</ul>	
 </body>
 </html>

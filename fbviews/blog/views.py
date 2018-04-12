@@ -34,6 +34,7 @@ def detail_view(request,pk):
 	context = {'query_set':query_set}
 	return render(request, template, context)
 
+@login_required 
 def create_view(request):	
 	# if request.method == "POST"
 	# 	form = PostModelForm(request.POST)
@@ -48,6 +49,19 @@ def create_view(request):
 		return redirect(reverse('blog:list'))
 	template = 'blog/create.html'
 	context = {'form':form}
+	return render(request, template, context)
+
+@login_required 
+def update_view(request, pk=None):
+	qs = get_object_or_404(PostModel,pk=pk)
+	form = PostModelForm(request.POST or None, instance=qs)
+	template = 'blog/update.html'
+	context = {'form':form}
+	if form.is_valid():
+		form.save(commit=False)
+		form.save()
+		print(form.cleaned_data)
+		return redirect(reverse('blog:detail',kwargs={'pk':pk}))	
 	return render(request, template, context)
 
 @login_required
