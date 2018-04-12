@@ -91,3 +91,34 @@ def login_require_view(request):
 			   'boolean': True,
 			  }
 	return render(request, template, context)
+
+"""
+COMBINING CRUD IN ONE VIEW
+"""
+# def robust_view(request, pk=None):
+# 	obj = None
+# 	context = {}
+
+# 	if id is None:
+# 		template = 'blog/create.html'
+# 	else:
+# 		obj = get_object_or_404(PostModel, pk=pk)
+# 		context['object'] = obj
+# 		template = 'blog/detail.html'
+# 		if 'edit' in request.get_full_path():
+# 			template = 'blog/update.html'
+# 		if 'delete' in request.get_full_path():
+# 			template = 'blog/delete.html'
+# 			if request.method == "POST":
+# 				obj.delete()
+# 				return redirect(reverse('blog:list'))
+
+# 	# if 'edit' in request.get_full_path() or 'create' in request.get_full_path():
+# 	form = PostModelForm(request.POST or None, instance=obj)
+# 	context['form'] = form
+# 	if form.is_valid():
+# 		obj.save()
+# 		if obj is not None:
+# 			return redirect(reverse('blog:detail',kwargs={'pk':obj.pk}))
+# 		context['form'] = PostModelForm()
+# 	return render(request, template, context)
