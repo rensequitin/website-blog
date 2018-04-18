@@ -6,9 +6,10 @@
 </head>
 <body>
 	{% for obj in object_list %}
-	<ul>	
+	<ul>
+		<li><a href="{% url 'blog:detail' obj.slug %}">Click here</a></li>
 		<li>{{ obj.title }}</li>		
 	</ul>	
-	{% endfor %}	
+	{% endfor %}
 </body>
 </html>
