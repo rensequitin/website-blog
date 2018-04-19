@@ -18,8 +18,7 @@ PUBLISH_CHOICES = [
 class PostModel(models.Model):
     id = models.BigAutoField(primary_key=True)
     active = models.BooleanField(default=True)
-    title = models.CharField(max_length=240, 
-                             verbose_name='Post title', 
+    title = models.CharField(max_length=240,                              
                              unique=True,
                              error_messages={'unique': 'This title is not unique, please try again.',
                                				 'blank': 'This field is not full, please try again.'},
