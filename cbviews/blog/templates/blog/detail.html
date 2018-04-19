@@ -9,6 +9,7 @@
 		<li>Name: {{ object.title }}</li>
 		<li>Content: {{ object.content }}</li>
 		<li>{{ object.added_by }}</li>
+		<li><a href="{% url 'blog:update' object.slug %}">Update</a></li>
 	</ul>	
 </body>
 </html>

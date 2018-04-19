@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import PostModel
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse
 from .forms import PostCreateForm
 
@@ -29,3 +29,10 @@ class PostCreate(CreateView):
 	def form_valid(self, form):
 		form.instance.added_by = self.request.user 
 		return super().form_valid(form)
+
+class PostUpdate(UpdateView):
+	model = PostModel
+	form_class = PostCreateForm
+	template_name = 'blog/update.html'
+	def get_success_url(self):
+		return '{}'.format(reverse('blog:index'))
