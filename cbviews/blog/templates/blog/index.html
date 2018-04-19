@@ -8,8 +8,9 @@
 	{% for obj in object_list %}
 	<ul>
 		<li><a href="{% url 'blog:detail' obj.slug %}">Click here</a></li>
-		<li>{{ obj.title }}</li>		
+		<li>{{ obj.title }}</li>
 	</ul>	
 	{% endfor %}
+	<a href="{% url 'blog:create' %}"><input type="button" value="Create"></a>
 </body>
 </html>

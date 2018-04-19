@@ -28,8 +28,9 @@ class PostModel(models.Model):
     content = models.TextField(null=True, blank=True)
     publish = models.CharField(max_length=120, choices=PUBLISH_CHOICES, default='draft')
     view_count = models.IntegerField(default=0)
-    publish_date = models.DateField(auto_now=False, auto_now_add=False, default=timezone.now())
+    publish_date = models.DateField(auto_now=False, auto_now_add=False, default=timezone.now)
     author_email = models.EmailField(max_length=240, null=True, blank=True)
+    added_by = models.CharField(max_length=240, default='Anonymous')
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
